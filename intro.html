@@ -19,6 +19,7 @@
         box-sizing: border-box;
       }
 
+<<<<<<< HEAD
       body {
         font-family: sans-serif;
         line-height: 1.5;
@@ -154,6 +155,34 @@
           잘 옴.
         </p>
       </div>
+=======
+        <script type ="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    
+            const firebaseConfig = {
+              apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
+              authDomain: "sparta-c9ace.firebaseapp.com",
+              projectId: "sparta-c9ace",
+              storageBucket: "sparta-c9ace.firebasestorage.app",
+              messagingSenderId: "349133241553",
+              appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
+              measurementId: "G-V3DDJE9KP6"
+            }
+    
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            // 팀장의 파이어베이스 설정
+
+
+        </script>
+</head>
+<body>
+    <div>
+        <h1>Hello</h1>
+>>>>>>> 1a817e35e69f590fed8ab158a4730252fbf1bf65
     </div>
   </body>
 </html>
