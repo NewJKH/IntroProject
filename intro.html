@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>팀 소개하기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+
     <style>
       * {
         margin: 0;
@@ -19,7 +20,6 @@
         box-sizing: border-box;
       }
 
-<<<<<<< HEAD
       body {
         font-family: sans-serif;
         line-height: 1.5;
@@ -35,7 +35,6 @@
       .profile-container {
         max-width: 900px;
         margin: 0 auto;
-
         padding: 30px;
       }
 
@@ -103,12 +102,12 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
       import {
+        getFirestore,
         collection,
         addDoc,
+        getDocs,
       } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-      import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
@@ -122,9 +121,9 @@
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-      // 팀장의 파이어베이스 설정
     </script>
   </head>
+
   <body>
     <h1>선원 소개</h1>
 
@@ -155,34 +154,6 @@
           잘 옴.
         </p>
       </div>
-=======
-        <script type ="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    
-            const firebaseConfig = {
-              apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
-              authDomain: "sparta-c9ace.firebaseapp.com",
-              projectId: "sparta-c9ace",
-              storageBucket: "sparta-c9ace.firebasestorage.app",
-              messagingSenderId: "349133241553",
-              appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
-              measurementId: "G-V3DDJE9KP6"
-            }
-    
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-            // 팀장의 파이어베이스 설정
-
-
-        </script>
-</head>
-<body>
-    <div>
-        <h1>Hello</h1>
->>>>>>> 1a817e35e69f590fed8ab158a4730252fbf1bf65
     </div>
   </body>
 </html>
