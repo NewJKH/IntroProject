@@ -1,19 +1,159 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>팀 소개하기</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-</head>
-<body>
-    <div>
-        <h1>Hello</h1>
+      body {
+        font-family: sans-serif;
+        line-height: 1.5;
+        background-color: #f9f9ff;
+        padding: 40px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .profile-container {
+        max-width: 900px;
+        margin: 0 auto;
+
+        padding: 30px;
+      }
+
+      .profile-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .profile-photo {
+        width: 250px;
+        height: 250px;
+        background-color: #ccc;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+      }
+
+      .basic-info {
+        flex: 1;
+        min-width: 250px;
+        font-size: 1.1rem;
+      }
+
+      .basic-info p {
+        margin-bottom: 10px;
+      }
+
+      .basic-info span {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .extra-info {
+        margin-top: 20px;
+      }
+
+      .extra-info h2 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+      }
+
+      .extra-info p {
+        margin-bottom: 8px;
+      }
+
+      .extra-info span {
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+      import {
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+      import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
+        authDomain: "sparta-c9ace.firebaseapp.com",
+        projectId: "sparta-c9ace",
+        storageBucket: "sparta-c9ace.firebasestorage.app",
+        messagingSenderId: "349133241553",
+        appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
+        measurementId: "G-V3DDJE9KP6",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      // 팀장의 파이어베이스 설정
+    </script>
+  </head>
+  <body>
+    <h1>선원 소개</h1>
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="profile-photo">
+          <img src="img/김신영.jpg" alt="김신영 프로필 사진" />
+        </div>
+        <div class="basic-info">
+          <p><span>이름:</span> 김신영</p>
+          <p><span>나이:</span> 00년생</p>
+          <p><span>하고싶은 말:</span> 월아천충</p>
+        </div>
+      </div>
+
+      <div class="extra-info">
+        <h2>추가 정보</h2>
+        <p>
+          <span>블로그/GitHub:</span>
+          <a href="https://github.com/zeroColaa" target="_blank"
+            >https://github.com/zeroColaa</a
+          >
+        </p>
+        <p><span>좋아하는 영화:</span> 레퀴엠</p>
+        <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
+        <p>
+          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
+          잘 옴.
+        </p>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>
