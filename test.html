@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>OrgChart Example</title>
+  <script src="https://balkangraph.com/js/OrgChart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #tree {
+      width: 100%;
+      height: 600px;
+      background-color: transparent !important;
+    }
+
+    .boc-edit-form {
+      display: none !important
+    }
+
+    #tree svg,
+    .boc-container {
+      background-color: transparent !important;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <script>
+    const chart = new OrgChart(document.getElementById("tree"), {
+      template: "luba",
+      nodes: [
+        { id: 1, name: "제너럴 호", title: "팀 이름", img: "https://cdn.pixabay.com/photo/2016/03/19/21/24/cruise-1267492_640.jpg" },
+        { id: 2, pid: 1, name: "장군호", title: "선장", img: "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F03%2F19%2F21%2F24%2Fcruise-1267492_640.jpg&type=a340" },
+        { id: 3, pid: 1, name: "이은혁", title: "선원1", img: "지피티용.png" },
+        { id: 4, pid: 1, name: "허록", title: "선원2" },
+        { id: 5, pid: 1, name: "김신영", title: "선원3" },
+        { id: 6, pid: 1, name: "박성현", title: "선원4" },
+        { id: 7, pid: 1, name: "임호진", title: "선원5" }
+      ],
+      nodeBinding: {
+        field_0: "name",
+        field_1: "title",
+        img_0: "img"
+      },
+      nodeMenu: {
+        enabled: false
+      },
+      nodeContextMenu: {
+        enabled: false
+      },
+      editForm: {
+        enabled: false
+      },
+      enableDragDrop: false,
+      zoom: false,
+
+      nodeClick: function (sender, args) {
+        args.preventDefault();
+      }
+    });
+
+    chart.on('init', function () {
+      chart.fit();
+      console.log("test1");
+    })
+
+    chart.on('render', function () {
+    });
+
+    chart.on('click', function (sender, args) {
+      const clickedNode = args.node;
+      const nodeData = chart.get(clickedNode.id);
+
+      $('[id^=info-]').hide();
+
+      if(nodeData.id > 1) {
+        console.log(nodeData);
+        $(`#info-${nodeData.id}`)
+      .html(`<strong>${nodeData.name}</strong><br/>역할: ${nodeData.title}`).show();
+      console.log(nodeData.id);
+      }
+
+    })
+
+    window.addEventListener("resize", () => {
+      if (chart) {
+        chart.fit();
+      }
+    })
+
+  </script>
+
+  <div id="info-2" style="display: none; background: lightgray; padding: 10px;">장군호</div>
+  <div id="info-3" style="display: none; background: lightgray; padding: 10px;">이은혁</div>
+  <div id="info-4" style="display: none; background: lightgray; padding: 10px;">허록</div>
+  <div id="info-5" style="display: none; background: lightgray; padding: 10px;">김선영</div>
+  <div id="info-6" style="display: none; background: lightgray; padding: 10px;">박성현</div>
+  <div id="info-7" style="display: none; background: lightgray; padding: 10px;">임호진</div>
+
+</body>
+
+</html>
