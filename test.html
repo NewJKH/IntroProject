@@ -15,13 +15,22 @@
 
     .boc-edit-form {
       display: none !important
+        /* 기존에 클릭하면 나오는 사이드페이지 안보이도록 하기기 */
     }
+
+    .boc-search {
+      display: none !important;
+    }
+
+    .boc-chart-menu {
+      display: none !important;
+    }
+    
 
     #tree svg,
     .boc-container {
       background-color: transparent !important;
     }
-
   </style>
 </head>
 
@@ -36,9 +45,9 @@
         { id: 1, name: "제너럴 호", title: "팀 이름", img: "https://cdn.pixabay.com/photo/2016/03/19/21/24/cruise-1267492_640.jpg" },
         { id: 2, pid: 1, name: "장군호", title: "선장", img: "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F03%2F19%2F21%2F24%2Fcruise-1267492_640.jpg&type=a340" },
         { id: 3, pid: 1, name: "이은혁", title: "선원1", img: "" },
-        { id: 4, pid: 1, name: "허록", title: "선원2", img:""},
-        { id: 5, pid: 1, name: "김신영", title: "선원3", img: ""},
-        { id: 6, pid: 1, name: "박성현", title: "선원4", img: ""},
+        { id: 4, pid: 1, name: "허록", title: "선원2", img: "" },
+        { id: 5, pid: 1, name: "김신영", title: "선원3", img: "" },
+        { id: 6, pid: 1, name: "박성현", title: "선원4", img: "" },
         { id: 7, pid: 1, name: "임호진", title: "선원5", img: "" }
       ],
       nodeBinding: {
@@ -70,9 +79,14 @@
     })
 
     //렌더링 할 때 작동, chart.fit()할 때 이 부분도 같이 돌아가기 때문에
-    //계속해서 오류를 발생시켜 비워둠둠
+    //계속해서 오류를 발생시켜 비워둠
     chart.on('render', function () {
-    });
+      setTimeout(function () {
+        $('g[data-ctrl-n-menu-id]').remove();
+      }, 100);
+      console.log("render");
+    })
+
 
     //클릭할 때 작동, 클릭한 위치의 인물 소개를 띄우는 역할
     chart.on('click', function (sender, args) {
@@ -81,13 +95,13 @@
 
       $('[id^=info-]').hide(); //id가 "info-"로 시작하는 항목들 숨기기
 
-      if(nodeData.id > 1) {
+      if (nodeData.id > 1) {
         console.log(nodeData);
         $(`#info-${nodeData.id}`)
-      .html(`<strong>${nodeData.name}</strong><br/>역할: ${nodeData.title}`).show();
-      //info-숫자 아이디를 가지면 뒤에 있는 html 적기
-      //병합 과정에서 id를 맞추고 html부분을 제거할 듯함
-      console.log(nodeData.id);
+          .html(`<strong>${nodeData.name}</strong><br/>역할: ${nodeData.title}`).show();
+        //info-숫자 아이디를 가지면 뒤에 있는 html 적기
+        //병합 과정에서 id를 맞추고 html부분을 제거할 듯함
+        console.log(nodeData.id);
       }
 
     })
