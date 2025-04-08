@@ -12,91 +12,123 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body {
-        font-family: sans-serif;
-        line-height: 1.5;
-        background-color: #f9f9ff;
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f6f9;
         padding: 40px;
+        color: #333;
+      }
+      h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: "Roboto", sans-serif;
+      }
+      .profile-link {
+        display: inline-block;
+        margin: 10px 20px;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        color: #ffffff;
+        background-color: #007bff;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-decoration: none;
+        font-weight: bold;
       }
 
-      h1 {
-        text-align: center;
-        margin-bottom: 40px;
+      .profile-link:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
       }
 
       .profile-container {
-        max-width: 900px;
-        margin: 0 auto;
+        max-width: 750px;
+        margin: 20px auto;
         padding: 30px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
       }
 
+      .profile-container:hover {
+        transform: translateY(-5px);
+      }
       .profile-header {
         display: flex;
-        flex-direction: row;
-        align-items: center;
         justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 25px;
       }
 
       .profile-photo {
-        width: 250px;
-        height: 250px;
+        width: 180px;
+        height: 180px;
         background-color: #ccc;
+        border-radius: 50%;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       .profile-photo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50px;
+        border-radius: 50%;
       }
 
       .basic-info {
+        font-size: 1.2rem;
+        text-align: left;
         flex: 1;
-        min-width: 250px;
-        font-size: 1.1rem;
+        min-width: 200px;
       }
 
       .basic-info p {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        line-height: 1.6;
       }
 
       .basic-info span {
         font-weight: bold;
-        color: #333;
       }
-
       .extra-info {
-        margin-top: 20px;
+        margin-top: 25px;
       }
 
       .extra-info h2 {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
       }
 
       .extra-info p {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        font-size: 1.1rem;
       }
 
       .extra-info span {
         font-weight: bold;
         color: #333;
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #0056b3;
       }
     </style>
 
@@ -135,7 +167,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 파이팅파이팅</p>
         </div>
       </div>
 
@@ -149,10 +181,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
     <div
@@ -167,7 +196,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 뭐시라저시라</p>
         </div>
       </div>
 
@@ -181,10 +210,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
     <div
@@ -199,7 +225,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 뭐시기저시기</p>
         </div>
       </div>
 
@@ -213,10 +239,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
     <div
@@ -231,7 +254,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 이러쿵저러쿵</p>
         </div>
       </div>
 
@@ -245,10 +268,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
     <div
@@ -263,7 +283,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 어쩌구저쩌구</p>
         </div>
       </div>
 
@@ -277,10 +297,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
     <div
@@ -295,7 +312,7 @@
         <div class="basic-info">
           <p><span>이름:</span> 김신영</p>
           <p><span>나이:</span> 00년생</p>
-          <p><span>하고싶은 말:</span> 월아천충</p>
+          <p><span>하고싶은 말:</span> 화이팅합시다</p>
         </div>
       </div>
 
@@ -309,10 +326,7 @@
         </p>
         <p><span>좋아하는 영화:</span> 레퀴엠</p>
         <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-        <p>
-          <span>TMI:</span> 팹시 제로제로콜라 드셔보세요. 카페인도 없어서 잠이
-          잘 옴.
-        </p>
+        <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
       </div>
     </div>
   </body>
