@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,33 +10,72 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <script type ="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    
-            const firebaseConfig = {
-              apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
-              authDomain: "sparta-c9ace.firebaseapp.com",
-              projectId: "sparta-c9ace",
-              storageBucket: "sparta-c9ace.firebasestorage.app",
-              messagingSenderId: "349133241553",
-              appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
-              measurementId: "G-V3DDJE9KP6"
-            }
-    
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-            // 팀장의 파이어베이스 설정
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
+            authDomain: "sparta-c9ace.firebaseapp.com",
+            projectId: "sparta-c9ace",
+            storageBucket: "sparta-c9ace.firebasestorage.app",
+            messagingSenderId: "349133241553",
+            appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
+            measurementId: "G-V3DDJE9KP6"
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        // 팀장의 파이어베이스 설정
 
 
-        </script>
+    </script>
+
+    <style>
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #0d6efd; /* 색상 변경 */
+            font-weight: bold; /* 글씨 굵기 변경 */
+            transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
+        }
+    </style>
 </head>
+
 <body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id1">배 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id2">학창님발쌈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id3">선원 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id4">자기소개 내용</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id5">선원들에게 남기는 말글</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div>
         <h1>Hello</h1>
     </div>
 
 </body>
+
 </html>
