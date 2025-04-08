@@ -1,0 +1,51 @@
+.introduce {
+  padding: 80px 40px;
+  background-color: #f0f8ff !important;
+}
+
+.my-custom-img {
+  border-radius: 45px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.intro-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.intro-left,
+.intro-right {
+  max-width: 600px;
+  flex: 1 1 500px;
+}
+
+.intro-left img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fafafa;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card-body h5 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.card-body p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.ship-name {
+  text-color: white;
+}
