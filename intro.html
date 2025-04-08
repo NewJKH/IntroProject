@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,33 +10,131 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <script type ="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    
-            const firebaseConfig = {
-              apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
-              authDomain: "sparta-c9ace.firebaseapp.com",
-              projectId: "sparta-c9ace",
-              storageBucket: "sparta-c9ace.firebasestorage.app",
-              messagingSenderId: "349133241553",
-              appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
-              measurementId: "G-V3DDJE9KP6"
-            }
-    
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-            // 팀장의 파이어베이스 설정
+    <style>
+        .introduce {
+            height: 500px;
+            margin: 20px 40px 0px 40px;
+        }
+
+        .hi1 {
+            width: 500px;
+            height: 250px;
+            margin: 100px auto 0px 150px;
+            float: left;
+        }
+
+        .hi2 {
+            width: 500px;
+            height: 250px;
+            margin: 100px 200px 0px auto;
+            float: right;
+        }
+
+        .sogea {
+            font-size: larger;
+            text-align: center;
+        }
+
+        .card-body1 {
+            margin-left: 40px;
+            width: 400px;
+            height: 500px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        .card-body2 {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+    </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
+            authDomain: "sparta-c9ace.firebaseapp.com",
+            projectId: "sparta-c9ace",
+            storageBucket: "sparta-c9ace.firebasestorage.app",
+            messagingSenderId: "349133241553",
+            appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
+            measurementId: "G-V3DDJE9KP6"
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        // 팀장의 파이어베이스 설정
 
 
-        </script>
+    </script>
 </head>
+
 <body>
-    <div>
-        <h1>Hello</h1>
+    <div class="introduce">
+        <div class="hi1">
+            <div>
+                <div class="row g-0">
+                    <p class="sogea">제너럴 호</p>
+                    <div class="col-md-4">
+                        <img src="https://lh6.googleusercontent.com/proxy/vUSJ_MxCUhAtsBC4ZEbYrnB7K3OxCpqi6LyISYGUUkUhgTQkLmvkCq1hUKAI7vDMqDYtnSIgJiJk1jnjAHCBRoBN2ku9TS9XxoyC-8TIzjPPj7NuzoDccApR2ZPqPm8"
+                            class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body1">
+                            <h5 class="card-title">팀 소개 :</h5>
+                            <p class="card-text">
+                            <p>"제네럴 호"는 팀장의 이름 **장군(General)**과 **호(Boat)**에서 따온 이름으로,
+                                모든 팀원이 함께 타는 배라는 의미를 담고 있습니다.</p>
+                            <p>배에 올라타는 것을 뜻하는 On-boarding처럼,
+                                우리는 이제 막 첫 항해를 시작한 신입 선원들입니다.</p>
+                            <p>5개월간 함께 항해하며, 코딩이라는 바다를 건너는 여정 속에서
+                                각자의 역할에 익숙해지고, 팀이라는 조직에 자연스럽게 스며들기를 기대합니다.</p>
+                            <p>첫 프로젝트이기에 완벽을 향한 욕심은 당연하지만,
+                                무엇보다 내일배움캠프의 문화와 분위기에 적응하며 성장하는 시간임을 기억하겠습니다.</p>
+                            <p>우리의 항해가 순조롭길 바라며, 출항합니다!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hi2">
+            <p class="sogea">팀의 각오</p>
+            <div>
+                <div class="card-body2">
+                    <h5 class="card-title">제네럴 호의 7대 항해 수칙 </h5>
+                    <p class="card-text">
+                    <p>우리는 함께 출발합니다.
+                        누군가 뒤처지지 않도록 서로 도우며, 같은 속도로 나아갑니다.</p>
+
+                    <p>질문을 두려워하지 않습니다.
+                        모르는 걸 물어보는 건 부끄러운 일이 아닙니다. 가장 빠른 성장의 시작입니다.</p>
+
+                    <p>완벽보다는 꾸준함을 추구합니다.
+                        오늘의 작은 진전이, 내일의 큰 도약이 됨을 믿습니다.</p>
+
+                    <p>실수는 항해의 일부입니다.
+                        우리는 실수를 숨기지 않고, 함께 공유하며 해결해 나갑니다.</p>
+
+                    <p>의사소통이 우선입니다.
+                        갈등을 피하지 않고, 솔직하고 배려 있는 소통을 통해 건강한 팀 문화를 만듭니다.</p>
+
+                    <p>역할을 넘어, 책임을 함께 집니다.
+                        내 일이 아니더라도 팀을 위한 일이라면 기꺼이 나섭니다.</p>
+
+                    <p>우리는 끝까지 갑니다.
+                        파도가 아무리 거세도, 끝까지 배를 지키며 항해를 완주합니다.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+
 </body>
+
 </html>
