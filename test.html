@@ -63,29 +63,36 @@
       }
     });
 
+    //차트를 만들 때 작동, chart.fit()으로 초기 크기 조절절
     chart.on('init', function () {
       chart.fit();
       console.log("test1");
     })
 
+    //렌더링 할 때 작동, chart.fit()할 때 이 부분도 같이 돌아가기 때문에
+    //계속해서 오류를 발생시켜 비워둠둠
     chart.on('render', function () {
     });
 
+    //클릭할 때 작동, 클릭한 위치의 인물 소개를 띄우는 역할
     chart.on('click', function (sender, args) {
       const clickedNode = args.node;
       const nodeData = chart.get(clickedNode.id);
 
-      $('[id^=info-]').hide();
+      $('[id^=info-]').hide(); //id가 "info-"로 시작하는 항목들 숨기기
 
       if(nodeData.id > 1) {
         console.log(nodeData);
         $(`#info-${nodeData.id}`)
       .html(`<strong>${nodeData.name}</strong><br/>역할: ${nodeData.title}`).show();
+      //info-숫자 아이디를 가지면 뒤에 있는 html 적기
+      //병합 과정에서 id를 맞추고 html부분을 제거할 듯함
       console.log(nodeData.id);
       }
 
     })
 
+    //크기가 변경되면 맞추는 기능이지만 창의 크기가 작아질 때만 작동중
     window.addEventListener("resize", () => {
       if (chart) {
         chart.fit();
