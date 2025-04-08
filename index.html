@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>팀 소개하기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<html lang="ko">
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body></body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>제네럴 호</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: white;
+      font-family: 'Arial', sans-serif;
+      scroll-behavior: smooth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .hero {
+      position: relative;
+      width: 60vw;
+      height: 60vh;
+      background-image: url('https://assets.georgfischer.com/is/image/georgfischerag/gpfs_parallax_cruise-ferries_1920x1000px?qlt=82&wid=308&ts=1722968734191&dpr=off&fit=wrap');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 2px solid #ccc;
+    }
+
+    /* 오른쪽 상단 자기소개 텍스트 */
+    .toggle-link {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* 제네럴 호 텍스트 */
+    .ship-name {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      font-size: 24px;
+      font-weight: bold;
+      pointer-events: none; /* 클릭 막기: 클릭은 아래 투명 버튼으로 감지 */
+    }
+
+    /* 투명 클릭 영역 (배 위의 원 부분 가정) */
+    .click-area {
+      position: absolute;
+      top: 50%;    /* 원하는 위치 조절 가능 */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+    }
+
+    #about {
+      display: none;
+      padding: 100px 20px;
+      background-color: #e2e8f0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    function toggleAbout() {
+      const aboutSection = document.getElementById('about');
+      const isVisible = aboutSection.style.display === 'block';
+      aboutSection.style.display = isVisible ? 'none' : 'block';
+
+      if (!isVisible) {
+        setTimeout(() => {
+          aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- 배 이미지와 제어 요소들 -->
+  <div class="hero">
+    <div class="toggle-link" onclick="toggleAbout()">자기소개</div>
+    <div class="ship-name">제네럴 호</div>
+
+    <!-- 클릭 가능한 투명 원 -->
+    <div class="click-area" onclick="toggleAbout()"></div>
+  </div>
+
+  <!-- 자기소개 섹션 -->
+  <section id="about">
+    <h2>자기소개</h2>
+    <p>자기소개 란.</p>
+  </section>
+
+</body>
 </html>
