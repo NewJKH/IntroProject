@@ -1,514 +1,476 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-  <head>
-    <link rel="stylesheet" href="css/styles.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>팀 소개하기</title>
+<head>
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>팀 소개하기</title>
 
-    <script src="https://balkangraph.com/js/OrgChart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome CDN -->
-    <script
-      src="https://kit.fontawesome.com/e2d902e345.js"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://balkangraph.com/js/OrgChart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/e2d902e345.js" crossorigin="anonymous"></script>
 
-    <!-- Firebase SDK -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-        getDocs,
-      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
-        authDomain: "sparta-c9ace.firebaseapp.com",
-        projectId: "sparta-c9ace",
-        storageBucket: "sparta-c9ace.appspot.com",
-        messagingSenderId: "349133241553",
-        appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
-        measurementId: "G-V3DDJE9KP6",
-      };
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDWiNUv6rceCu1r4_q5_jFHihYmuedCqg",
+      authDomain: "sparta-c9ace.firebaseapp.com",
+      projectId: "sparta-c9ace",
+      storageBucket: "sparta-c9ace.appspot.com",
+      messagingSenderId: "349133241553",
+      appId: "1:349133241553:web:54497b3e51a82af2aad9f0",
+      measurementId: "G-V3DDJE9KP6",
+    };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-      window.addEventListener("DOMContentLoaded", async () => {
-        const allBoxes = document.querySelectorAll(".target-comment");
-        allBoxes.forEach((box) => (box.style.display = "none"));
+    window.addEventListener("DOMContentLoaded", async () => {
+      const allBoxes = document.querySelectorAll(".target-comment");
+      allBoxes.forEach((box) => (box.style.display = "none"));
 
-        const profileBoxes = document.querySelectorAll(".profile-container");
-        profileBoxes.forEach((box) => (box.style.display = "none"));
+      const profileBoxes = document.querySelectorAll(".profile-container");
+      profileBoxes.forEach((box) => (box.style.display = "none"));
 
-        let docs = await getDocs(collection(db, "comment"));
-        docs.forEach((doc) => {
-          let row = doc.data();
-          let { username, comment, who } = row;
-          let temp = `<div class="comment">${username} : ${comment}</div>`;
-          let box = document.getElementById(`comment-box-${who}`);
-          if (box) box.insertAdjacentHTML("beforeend", temp);
-        });
-
-        document
-          .getElementById("submitComment")
-          .addEventListener("click", async () => {
-            const username = document.getElementById("username").value;
-            const comment = document.getElementById("commentInput").value;
-            const who = document.getElementById("targetName").value;
-
-            if (!username || !comment) {
-              alert("이름과 댓글을 모두 입력해주세요.");
-              return;
-            }
-
-            await addDoc(collection(db, "comment"), {
-              username,
-              comment,
-              who,
-              timestamp: new Date(),
-            });
-
-            alert("댓글 저장 완료");
-            window.location.reload();
-          });
+      let docs = await getDocs(collection(db, "comment"));
+      docs.forEach((doc) => {
+        let row = doc.data();
+        let { username, comment, who } = row;
+        let temp = `<div class="comment">${username} : ${comment}</div>`;
+        let box = document.getElementById(`comment-box-${who}`);
+        if (box) box.insertAdjacentHTML("beforeend", temp);
       });
 
-      window.setTarget = function (name) {
-        document.getElementById("targetName").value = name;
-        document.getElementById(
-          "commentInput"
-        ).placeholder = `${name}에게 댓글을 남겨보세요...`;
+      document
+        .getElementById("submitComment")
+        .addEventListener("click", async () => {
+          const username = document.getElementById("username").value;
+          const comment = document.getElementById("commentInput").value;
+          const who = document.getElementById("targetName").value;
 
-        document
-          .querySelectorAll(".target-comment")
-          .forEach((box) => (box.style.display = "none"));
-        const targetBox = document.getElementById(`comment-box-${name}`);
-        if (targetBox) targetBox.style.display = "block";
-
-        document.querySelectorAll(".profile-container").forEach((profile) => {
-          profile.style.display = "none";
-        });
-        const profileBox = document.getElementById(`profile-container-${name}`);
-        if (profileBox) profileBox.style.display = "block";
-      };
-
-    </script>
-
-  <body>
-    <div class="introduce">
-      <div class="hi1" id="id1">
-        <div>
-          <div class="row g-0">
-            <p class="sogea">🚢 제너럴 호 (General Ho)</p>
-            <div class="col-md-4">
-              <img
-                src="https://lh6.googleusercontent.com/proxy/vUSJ_MxCUhAtsBC4ZEbYrnB7K3OxCpqi6LyISYGUUkUhgTQkLmvkCq1hUKAI7vDMqDYtnSIgJiJk1jnjAHCBRoBN2ku9TS9XxoyC-8TIzjPPj7NuzoDccApR2ZPqPm8"
-                class="img-fluid my-custom-img"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body1">
-                <h5 class="card-title">팀 소개 :</h5>
-                <p class="card-text"></p>
-                <p>
-                  "제네럴 호"는 팀장의 이름 **장군(General)**과 **호(Boat)**에서
-                  따온 이름으로, 모든 팀원이 함께 타는 배라는 의미를 담고
-                  있습니다.
-                </p>
-                <p>
-                  배에 올라타는 것을 뜻하는 On-boarding처럼, 우리는 이제 막 첫
-                  항해를 시작한 신입 선원들입니다.
-                </p>
-                <p>
-                  5개월간 함께 항해하며, 코딩이라는 바다를 건너는 여정 속에서
-                  각자의 역할에 익숙해지고, 팀이라는 조직에 자연스럽게
-                  스며들기를 기대합니다.
-                </p>
-                <p>
-                  첫 프로젝트이기에 완벽을 향한 욕심은 당연하지만, 무엇보다
-                  내일배움캠프의 문화와 분위기에 적응하며 성장하는 시간임을
-                  기억하겠습니다.
-                </p>
-                <p>우리의 항해가 순조롭길 바라며, 출항합니다!</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hi2">
-        <p class="sogea">팀의 각오 💪</p>
-        <div>
-          <div class="card-body2">
-            <h5 class="card-title">제네럴 호의 7대 항해 수칙</h5>
-            <p class="card-text"></p>
-            <p>
-              우리는 함께 출발합니다. 누군가 뒤처지지 않도록 서로 도우며, 같은
-              속도로 나아갑니다.
-            </p>
-
-            <p>
-              질문을 두려워하지 않습니다. 모르는 걸 물어보는 건 부끄러운 일이
-              아닙니다. 가장 빠른 성장의 시작입니다.
-            </p>
-
-            <p>
-              완벽보다는 꾸준함을 추구합니다. 오늘의 작은 진전이, 내일의 큰
-              도약이 됨을 믿습니다.
-            </p>
-
-            <p>
-              실수는 항해의 일부입니다. 우리는 실수를 숨기지 않고, 함께 공유하며
-              해결해 나갑니다.
-            </p>
-
-            <p>
-              의사소통이 우선입니다. 갈등을 피하지 않고, 솔직하고 배려 있는
-              소통을 통해 건강한 팀 문화를 만듭니다.
-            </p>
-
-            <p>
-              역할을 넘어, 책임을 함께 집니다. 내 일이 아니더라도 팀을 위한
-              일이라면 기꺼이 나섭니다.
-            </p>
-
-            <p>
-              우리는 끝까지 갑니다. 파도가 아무리 거세도, 끝까지 배를 지키며
-              항해를 완주합니다.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 원하는 위치(예: 상단)에 h1 추가 -->
-    <h1 id="chart-title" class="orgchart-title">⚓선원 소개⚓</h1>
-    <!-- OrgChart 영역 -->
-    <div id="tree"></div>
-
-    <div class="profile-comment-section">
-      <!-- 프로필 영역 -->
-      <div id="profile-wrapper">
-        <div id="profile-container-장군호" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <img
-                src="https://avatars.githubusercontent.com/u/169756578?v=4"
-              />
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 장군호</p>
-              <p><span>나이:</span> 00년생</p>
-              <p>
-                <span>하고싶은 말:</span> 자바를 사랑하는 사람 / 수료까지
-                가즈아!!!!!!!!!
-              </p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/NewJKH" target="_blank"
-                >https://github.com/NewJKH</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 인터스텔라</p>
-            <p><span>취미:</span> 자바 코딩하기</p>
-            <p><span>TMI:</span> 자바 하실분 있나요?</p>
-          </div>
-        </div>
-        <div id="profile-container-이은혁" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <!-- <img src="img/장군호.jpg" /> -->
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 이은혁</p>
-              <p><span>나이:</span> 00년생</p>
-              <p><span>하고싶은 말:</span> 파이팅파이팅</p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/zeroColaa" target="_blank"
-                >https://github.com/zeroColaa</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 레퀴엠</p>
-            <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-            <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
-          </div>
-        </div>
-        <div id="profile-container-허록" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <!-- <img src="img/장군호.jpg" /> -->
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 허록</p>
-              <p><span>나이:</span> 00년생</p>
-              <p><span>하고싶은 말:</span> 파이팅파이팅</p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/zeroColaa" target="_blank"
-                >https://github.com/zeroColaa</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 레퀴엠</p>
-            <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-            <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
-          </div>
-        </div>
-        <div id="profile-container-김신영" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <!-- <img src="img/장군호.jpg" /> -->
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 김신영</p>
-              <p><span>나이:</span> 00년생</p>
-              <p><span>하고싶은 말:</span> 파이팅파이팅</p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/zeroColaa" target="_blank"
-                >https://github.com/zeroColaa</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 레퀴엠</p>
-            <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-            <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
-          </div>
-        </div>
-        <div id="profile-container-박성현" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <!-- <img src="img/장군호.jpg" /> -->
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 박성현</p>
-              <p><span>나이:</span> 95년생</p>
-              <p><span>하고싶은 말:</span> 파이팅파이팅</p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/zeroColaa" target="_blank"
-                >https://github.com/zeroColaa</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 레퀴엠</p>
-            <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-            <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
-          </div>
-        </div>
-        <div id="profile-container-임호진" class="profile-container">
-          <h1 class="profile-title">👋자기소개</h1>
-          <div class="profile-header">
-            <div class="profile-photo">
-              <!-- <img src="img/장군호.jpg" /> -->
-            </div>
-            <div class="basic-info">
-              <p><span>이름:</span> 임호진</p>
-              <p><span>나이:</span> 00년생</p>
-              <p><span>하고싶은 말:</span> 파이팅파이팅</p>
-            </div>
-          </div>
-          <div class="extra-info">
-            <h2>추가 정보</h2>
-            <p>
-              <span>블로그/GitHub:</span>
-              <a href="https://github.com/zeroColaa" target="_blank"
-                >https://github.com/zeroColaa</a
-              >
-            </p>
-            <p><span>좋아하는 영화:</span> 레퀴엠</p>
-            <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
-            <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
-          </div>
-        </div>
-      </div>
-      <div id="comment-wrapper">
-        <div class="target-comment" id="comment-box-장군호">
-          <h1>장군호에게 남긴 댓글 ✏️</h1>
-        </div>
-        <div class="target-comment" id="comment-box-이은혁">
-          <h1>이은혁에게 남긴 댓글 ✏️</h1>
-        </div>
-        <div class="target-comment" id="comment-box-허록">
-          <h1>허록에게 남긴 댓글 ✏️</h1>
-        </div>
-        <div class="target-comment" id="comment-box-김신영">
-          <h1>김신영에게 남긴 댓글 ✏️</h1>
-        </div>
-        <div class="target-comment" id="comment-box-박성현">
-          <h1>박성현에게 남긴 댓글 ✏️</h1>
-        </div>
-        <div class="target-comment" id="comment-box-임호진">
-          <h1>임호진에게 남긴 댓글 ✏️</h1>
-        </div>
-      </div>
-    </div>
-
-    <!-- 댓글 영역 -->
-
-    <div class="comment-wrapper">
-      <h1 id="comment-title">📬 선원들에게 댓글을 남겨 보세요 📬</h1>
-      <div class="comment-box">
-        <input
-          type="text"
-          id="username"
-          placeholder="이름을 입력하세요"
-          class="name-input"
-        />
-        <textarea
-          id="commentInput"
-          placeholder="장군호에게 댓글을 남겨보세요..."
-        ></textarea>
-        <input type="hidden" id="targetName" value="장군호" />
-        <button id="submitComment">댓글 남기기</button>
-      </div>
-    </div>
-
-    <!-- OrgChart Script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const chart = new OrgChart(document.getElementById("tree"), {
-          template: "luba",
-          nodes: [
-            {
-              id: 1,
-              name: "제너럴 호",
-              title: "팀 이름",
-              img: "https://cdn.pixabay.com/photo/2016/03/19/21/24/cruise-1267492_640.jpg",
-            },
-            {
-              id: 2,
-              pid: 1,
-              name: "장군호",
-              title: "선장",
-              img: "https://avatars.githubusercontent.com/u/169756578?v=4",
-            },
-            { id: 3, pid: 1, name: "이은혁", title: "선원1", img: "" },
-            { id: 4, pid: 1, name: "허록", title: "선원2", img: "" },
-            { id: 5, pid: 1, name: "김신영", title: "선원3", img: "" },
-            { id: 6, pid: 1, name: "박성현", title: "선원4", img: "" },
-            { id: 7, pid: 1, name: "임호진", title: "선원5", img: "" },
-          ],
-          nodeBinding: {
-            field_0: "name",
-            field_1: "title",
-            img_0: "img",
-          },
-          nodeMenu: {
-            enabled: false,
-          },
-          nodeContextMenu: {
-            enabled: false,
-          },
-          editForm: {
-            enabled: false,
-          },
-          enableDragDrop: false,
-          zoom: false,
-          nodeClick: function (sender, args) {
-            args.preventDefault(); // 기본 클릭 막기
-          },
-        });
-
-        chart.on("init", function () {
-          chart.fit();
-          showProfileAndComment("장군호"); // 기본 표시
-        });
-
-        chart.on("render", function () {
-          setTimeout(function () {
-            $("g[data-ctrl-n-menu-id]").remove();
-          }, 1);
-        });
-
-        chart.on("click", function (sender, args) {
-          const node = chart.get(args.node.id);
-          if (node && node.name) {
-            showProfileAndComment(node.name);
-            setTarget(node.name);
+          if (!username || !comment) {
+            alert("이름과 댓글을 모두 입력해주세요.");
+            return;
           }
+
+          await addDoc(collection(db, "comment"), {
+            username,
+            comment,
+            who,
+            timestamp: new Date(),
+          });
+
+          alert("댓글 저장 완료");
+          window.location.reload();
         });
+    });
 
-        function showProfileAndComment(name) {
-          $(".profile-container").hide();
-          $(".target-comment").hide();
+    window.setTarget = function (name) {
+      document.getElementById("targetName").value = name;
+      document.getElementById(
+        "commentInput"
+      ).placeholder = `${name}에게 댓글을 남겨보세요...`;
 
-          $(`#profile-container-${name}`).show();
-          $(`#comment-box-${name}`).show();
-        }
+      document
+        .querySelectorAll(".target-comment")
+        .forEach((box) => (box.style.display = "none"));
+      const targetBox = document.getElementById(`comment-box-${name}`);
+      if (targetBox) targetBox.style.display = "block";
 
-        window.addEventListener("resize", () => {
-          if (chart) chart.fit();
-        });
+      document.querySelectorAll(".profile-container").forEach((profile) => {
+        profile.style.display = "none";
       });
-    </script>
+      const profileBox = document.getElementById(`profile-container-${name}`);
+      if (profileBox) profileBox.style.display = "block";
+    };
 
-    <!-- 네비게이션 바 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <div
-          class="collapse navbar-collapse justify-content-start"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="index.html"
-                onclick="sessionStorage.setItem('fromIntro', 'true')"
-                >홈</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#id1">우리조 소개</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#chart-title">선원 소개</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#profile-wrapper">자기소개 내용</a>
-            </li>
-          </ul>
+  </script>
+
+<body>
+  <div class="introduce">
+    <div class="hi1" id="id1">
+      <div>
+        <div class="row g-0">
+          <p class="sogea">🚢 제너럴 호 (General Ho)</p>
+          <div class="col-md-4">
+            <img
+              src="https://lh6.googleusercontent.com/proxy/vUSJ_MxCUhAtsBC4ZEbYrnB7K3OxCpqi6LyISYGUUkUhgTQkLmvkCq1hUKAI7vDMqDYtnSIgJiJk1jnjAHCBRoBN2ku9TS9XxoyC-8TIzjPPj7NuzoDccApR2ZPqPm8"
+              class="img-fluid my-custom-img" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body1">
+              <h5 class="card-title">팀 소개 :</h5>
+              <p class="card-text"></p>
+              <p>
+                "제네럴 호"는 팀장의 이름 **장군(General)**과 **호(Boat)**에서
+                따온 이름으로, 모든 팀원이 함께 타는 배라는 의미를 담고
+                있습니다.
+              </p>
+              <p>
+                배에 올라타는 것을 뜻하는 On-boarding처럼, 우리는 이제 막 첫
+                항해를 시작한 신입 선원들입니다.
+              </p>
+              <p>
+                5개월간 함께 항해하며, 코딩이라는 바다를 건너는 여정 속에서
+                각자의 역할에 익숙해지고, 팀이라는 조직에 자연스럽게
+                스며들기를 기대합니다.
+              </p>
+              <p>
+                첫 프로젝트이기에 완벽을 향한 욕심은 당연하지만, 무엇보다
+                내일배움캠프의 문화와 분위기에 적응하며 성장하는 시간임을
+                기억하겠습니다.
+              </p>
+              <p>우리의 항해가 순조롭길 바라며, 출항합니다!</p>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
-    <div id="splash-screen">
-      <i class="fa-solid fa-anchor"></i>
-
     </div>
+    <div class="hi2">
+      <p class="sogea">팀의 각오 💪</p>
+      <div>
+        <div class="card-body2">
+          <h5 class="card-title">제네럴 호의 7대 항해 수칙</h5>
+          <p class="card-text"></p>
+          <p>
+            우리는 함께 출발합니다. 누군가 뒤처지지 않도록 서로 도우며, 같은
+            속도로 나아갑니다.
+          </p>
+
+          <p>
+            질문을 두려워하지 않습니다. 모르는 걸 물어보는 건 부끄러운 일이
+            아닙니다. 가장 빠른 성장의 시작입니다.
+          </p>
+
+          <p>
+            완벽보다는 꾸준함을 추구합니다. 오늘의 작은 진전이, 내일의 큰
+            도약이 됨을 믿습니다.
+          </p>
+
+          <p>
+            실수는 항해의 일부입니다. 우리는 실수를 숨기지 않고, 함께 공유하며
+            해결해 나갑니다.
+          </p>
+
+          <p>
+            의사소통이 우선입니다. 갈등을 피하지 않고, 솔직하고 배려 있는
+            소통을 통해 건강한 팀 문화를 만듭니다.
+          </p>
+
+          <p>
+            역할을 넘어, 책임을 함께 집니다. 내 일이 아니더라도 팀을 위한
+            일이라면 기꺼이 나섭니다.
+          </p>
+
+          <p>
+            우리는 끝까지 갑니다. 파도가 아무리 거세도, 끝까지 배를 지키며
+            항해를 완주합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 원하는 위치(예: 상단)에 h1 추가 -->
+  <h1 id="chart-title" class="orgchart-title">⚓선원 소개⚓</h1>
+  <!-- OrgChart 영역 -->
+  <div id="tree"></div>
+
+  <div class="profile-comment-section">
+    <!-- 프로필 영역 -->
+    <div id="profile-wrapper">
+      <div id="profile-container-장군호" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <img src="https://avatars.githubusercontent.com/u/169756578?v=4" />
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 장군호</p>
+            <p><span>나이:</span> 00년생</p>
+            <p>
+              <span>하고싶은 말:</span> 자바를 사랑하는 사람 / 수료까지
+              가즈아!!!!!!!!!
+            </p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/NewJKH" target="_blank">https://github.com/NewJKH</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 인터스텔라</p>
+          <p><span>취미:</span> 자바 코딩하기</p>
+          <p><span>TMI:</span> 자바 하실분 있나요?</p>
+        </div>
+      </div>
+      <div id="profile-container-이은혁" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <!-- <img src="img/장군호.jpg" /> -->
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 이은혁</p>
+            <p><span>나이:</span> 03년생</p>
+            <p><span>하고싶은 말:</span> 모두 파이팅</p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/FlashbangCat" target="_blank">https://github.com/FlashbangCat</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 라스트 홀리데이</p>
+          <p><span>취미:</span> 영화 보기, 게임하기, 수다떨기</p>
+          <p><span>TMI:</span> MBTI I99% 극내향인.</p>
+        </div>
+      </div>
+      <div id="profile-container-허록" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <!-- <img src="img/장군호.jpg" /> -->
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 허록</p>
+            <p><span>나이:</span> 00년생</p>
+            <p><span>하고싶은 말:</span> 파이팅파이팅</p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/zeroColaa" target="_blank">https://github.com/zeroColaa</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 레퀴엠</p>
+          <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
+          <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
+        </div>
+      </div>
+      <div id="profile-container-김신영" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <!-- <img src="img/장군호.jpg" /> -->
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 김신영</p>
+            <p><span>나이:</span> 00년생</p>
+            <p><span>하고싶은 말:</span> 파이팅파이팅</p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/zeroColaa" target="_blank">https://github.com/zeroColaa</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 레퀴엠</p>
+          <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
+          <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
+        </div>
+      </div>
+      <div id="profile-container-박성현" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <!-- <img src="img/장군호.jpg" /> -->
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 박성현</p>
+            <p><span>나이:</span> 95년생</p>
+            <p><span>하고싶은 말:</span> 파이팅파이팅</p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/zeroColaa" target="_blank">https://github.com/zeroColaa</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 레퀴엠</p>
+          <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
+          <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
+        </div>
+      </div>
+      <div id="profile-container-임호진" class="profile-container">
+        <h1 class="profile-title">👋자기소개</h1>
+        <div class="profile-header">
+          <div class="profile-photo">
+            <!-- <img src="img/장군호.jpg" /> -->
+          </div>
+          <div class="basic-info">
+            <p><span>이름:</span> 임호진</p>
+            <p><span>나이:</span> 00년생</p>
+            <p><span>하고싶은 말:</span> 파이팅파이팅</p>
+          </div>
+        </div>
+        <div class="extra-info">
+          <h2>추가 정보</h2>
+          <p>
+            <span>블로그/GitHub:</span>
+            <a href="https://github.com/zeroColaa" target="_blank">https://github.com/zeroColaa</a>
+          </p>
+          <p><span>좋아하는 영화:</span> 레퀴엠</p>
+          <p><span>취미:</span> 영화 보기, 피아노 치기, 산책</p>
+          <p><span>TMI:</span> 팹시 제로제로콜라 드셔보세요.</p>
+        </div>
+      </div>
+    </div>
+    <div id="comment-wrapper">
+      <div class="target-comment" id="comment-box-장군호">
+        <h1>장군호에게 남긴 댓글 ✏️</h1>
+      </div>
+      <div class="target-comment" id="comment-box-이은혁">
+        <h1>이은혁에게 남긴 댓글 ✏️</h1>
+      </div>
+      <div class="target-comment" id="comment-box-허록">
+        <h1>허록에게 남긴 댓글 ✏️</h1>
+      </div>
+      <div class="target-comment" id="comment-box-김신영">
+        <h1>김신영에게 남긴 댓글 ✏️</h1>
+      </div>
+      <div class="target-comment" id="comment-box-박성현">
+        <h1>박성현에게 남긴 댓글 ✏️</h1>
+      </div>
+      <div class="target-comment" id="comment-box-임호진">
+        <h1>임호진에게 남긴 댓글 ✏️</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- 댓글 영역 -->
+
+  <div class="comment-wrapper">
+    <h1 id="comment-title">📬 선원들에게 댓글을 남겨 보세요 📬</h1>
+    <div class="comment-box">
+      <input type="text" id="username" placeholder="이름을 입력하세요" class="name-input" />
+      <textarea id="commentInput" placeholder="장군호에게 댓글을 남겨보세요..."></textarea>
+      <input type="hidden" id="targetName" value="장군호" />
+      <button id="submitComment">댓글 남기기</button>
+    </div>
+  </div>
+
+  <!-- OrgChart Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const chart = new OrgChart(document.getElementById("tree"), {
+        template: "luba",
+        nodes: [
+          {
+            id: 1,
+            name: "제너럴 호",
+            title: "팀 이름",
+            img: "https://cdn.pixabay.com/photo/2016/03/19/21/24/cruise-1267492_640.jpg",
+          },
+          {
+            id: 2,
+            pid: 1,
+            name: "장군호",
+            title: "선장",
+            img: "https://avatars.githubusercontent.com/u/169756578?v=4",
+          },
+          { id: 3, pid: 1, name: "이은혁", title: "선원1", img: "https://avatars.githubusercontent.com/u/200888795?v=4" },
+          { id: 4, pid: 1, name: "허록", title: "선원2", img: "" },
+          { id: 5, pid: 1, name: "김신영", title: "선원3", img: "" },
+          { id: 6, pid: 1, name: "박성현", title: "선원4", img: "" },
+          { id: 7, pid: 1, name: "임호진", title: "선원5", img: "" },
+        ],
+        nodeBinding: {
+          field_0: "name",
+          field_1: "title",
+          img_0: "img",
+        },
+        nodeMenu: {
+          enabled: false,
+        },
+        nodeContextMenu: {
+          enabled: false,
+        },
+        editForm: {
+          enabled: false,
+        },
+        enableDragDrop: false,
+        zoom: false,
+        nodeClick: function (sender, args) {
+          args.preventDefault(); // 기본 클릭 막기
+        },
+      });
+
+      chart.on("init", function () {
+        chart.fit();
+        showProfileAndComment("장군호"); // 기본 표시
+      });
+
+      chart.on("render", function () {
+        setTimeout(function () {
+          $("g[data-ctrl-n-menu-id]").remove();
+        }, 1);
+      });
+
+      chart.on("click", function (sender, args) {
+        const node = chart.get(args.node.id);
+        if (node && node.name) {
+          showProfileAndComment(node.name);
+          setTarget(node.name);
+        }
+      });
+
+      function showProfileAndComment(name) {
+        $(".profile-container").hide();
+        $(".target-comment").hide();
+
+        $(`#profile-container-${name}`).show();
+        $(`#comment-box-${name}`).show();
+      }
+
+      window.addEventListener("resize", () => {
+        if (chart) chart.fit();
+      });
+    });
+  </script>
+
+  <!-- 네비게이션 바 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" onclick="sessionStorage.setItem('fromIntro', 'true')">홈</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#id1">우리조 소개</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#chart-title">선원 소개</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#profile-wrapper">자기소개 내용</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="splash-screen">
+    <i class="fa-solid fa-anchor"></i>
+
+  </div>
 
 </body>
 
