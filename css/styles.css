@@ -312,6 +312,7 @@ a:hover {
 }
 
 #chart-title {
+  scroll-margin-top: 80px;
   font-size: 70px; /* 더 큰 폰트 크기 */
   font-weight: bold; /* 볼드 처리 */
   text-align: center;
@@ -342,4 +343,8 @@ a:hover {
 #tree svg,
 .boc-container {
   background-color: transparent !important;
+}
+
+#id1, #profile-wrapper {
+  scroll-margin-top: 80px;
 }
