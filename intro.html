@@ -458,6 +458,7 @@
           const node = chart.get(args.node.id);
           if (node && node.name) {
             showProfileAndComment(node.name);
+            setTarget(node.name);
           }
         });
 
