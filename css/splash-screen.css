@@ -1,0 +1,26 @@
+@keyframes hideSplashScreen {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+#splash-screen {
+  background-color: #6f9dbf;
+  position: fixed; /* ✅ 'absolute' → 'fixed' 로 변경! */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* ✅ 모든 요소 위에 올라오게 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 250px;
+  color: #2e363e;
+  animation: hideSplashScreen 1s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
